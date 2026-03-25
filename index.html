@@ -1,1 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - Ambrish Tiwari</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(0,255,200,0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(120,100,255,0.12), transparent 28%),
+        linear-gradient(135deg, #07111f, #0a1530, #0f1d45);
+      color: #ffffff;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(92,124,255,0.20), rgba(0,230,118,0.12));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 30px 22px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      margin-bottom: 22px;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 180px;
+      height: 180px;
+      background: #00e6b8;
+      top: -60px;
+      left: -60px;
+      animation: blobMove 8s linear infinite alternate;
+    }
+
+    .hero::after {
+      width: 200px;
+      height: 200px;
+      background: #7a5cff;
+      bottom: -80px;
+      right: -80px;
+      animation: blobMove 9s linear infinite alternate-reverse;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-ring {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #00e6b8, #5c7cff, #d85bff);
+      animation: spinGlow 5s linear infinite;
+      box-shadow: 0 0 30px rgba(92,124,255,0.25);
+    }
+
+    .profile {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0d1834;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      font-weight: bold;
+      color: white;
+      border: 3px solid rgba(255,255,255,0.04);
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      animation: fadeUp 0.9s ease;
+    }
+
+    .hero p {
+      color: #d8e0ff;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 auto;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 16px;
+      background: linear-gradient(135deg, #19c37d, #00e676);
+      color: #08131f;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0 10px 22px rgba(25,195,125,0.28);
+      animation: pulseTag 2s ease-in-out infinite;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      padding: 22px 18px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+      backdrop-filter: blur(10px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      animation: fadeUp 0.9s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 40px rgba(0,0,0,0.35);
+      border-color: rgba(0,255,200,0.22);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+
+    .card p,
+    .card li {
+      color: #d7def7;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .info-line {
+      margin-bottom: 9px;
+    }
+
+    .label {
+      color: #8fb3ff;
+      font-weight: bold;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      margin-top: 18px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #22c55e, #00e676);
+      color: #07111f;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-weight: bold;
+      box-shadow: 0 10px 24px rgba(34,197,94,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(0,255,204,0.45);
+    }
+
+    .footer {
+      text-align: center;
+      color: #aab7db;
+      margin-top: 22px;
+      font-size: 14px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes pulseTag {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    @keyframes spinGlow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes blobMove {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, 10px) scale(1.08); }
+      100% { transform: translate(-10px, 20px) scale(0.96); }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 26px 16px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .profile-ring {
+        width: 115px;
+        height: 115px;
+      }
+
+      .profile {
+        font-size: 38px;
+      }
+
+      .card {
+        padding: 18px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="hero">
+      <div class="hero-content">
+        <div class="profile-ring">
+          <div class="profile">AT</div>
+        </div>
+        <h1>Ambrish Tiwari</h1>
+        <p>
+          I want to build my career in a growing field where I can improve my skills
+          and earn good income.
+        </p>
+        <div class="tag">Fresher | Social Media Enthusiast</div>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h2>Personal Details</h2>
+        <p class="info-line"><span class="label">Name:</span> Ambrish Tiwari</p>
+        <p class="info-line"><span class="label">Date of Birth:</span> 18 June 2002</p>
+        <p class="info-line">
+          <span class="label">Instagram ID:</span>
+          <a href="https://instagram.com/iamambrishh" target="_blank" style="color:#00ffcc; text-decoration:none;">
+            @iamambrishh
+          </a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Objective</h2>
+        <p>
+          I want to build my career in a growing field where I can improve my skills
+          and earn good income.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Skills</h2>
+        <ul>
+          <li>Basic Mobile &amp; Internet Knowledge</li>
+          <li>Social Media Handling</li>
+          <li>Video Editing (Basic)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Experience</h2>
+        <p>Fresher</p>
+      </div>
+
+      <div class="card">
+        <h2>Hobbies</h2>
+        <ul>
+          <li>Making Reels</li>
+          <li>Listening Music</li>
+          <li>Exploring Apps</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Instagram</h2>
+        <p>Follow my profile to connect with me and check my updates.</p>
+        <a class="contact-btn" href="https://www.instagram.com/iamambrishh" target="_blank">Open Instagram</a>
+      </div>
+
+      <div class="card full">
+        <h2>Declaration</h2>
+        <p>
+          I hereby declare that all the above information is true to the best of my knowledge.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © 2026 Ambrish Tiwari | About Me Website
+    </div>
+
+  </div>
+</body>
+        </html>
