@@ -365,26 +365,21 @@
 
   <div class="sound-note" id="soundNote">Tap anywhere to enable music 🎵</div>
 
-  <audio id="bgMusic" loop autoplay muted playsinline>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <audio id="bgMusic" loop playsinline>
+    <source src="song.mp3" type="audio/mpeg">
   </audio>
 
   <script>
     const music = document.getElementById("bgMusic");
     const soundNote = document.getElementById("soundNote");
 
-    window.addEventListener("load", () => {
-      music.play().then(() => {
-        music.muted = false;
-      }).catch(() => {});
-    });
-
     function enableMusic() {
-      music.muted = false;
-      music.play().catch(() => {});
-      if (soundNote) {
-        soundNote.style.display = "none";
-      }
+      music.volume = 0.2;
+      music.play().then(() => {
+        if (soundNote) {
+          soundNote.style.display = "none";
+        }
+      }).catch(() => {});
       document.removeEventListener("click", enableMusic);
       document.removeEventListener("touchstart", enableMusic);
     }
