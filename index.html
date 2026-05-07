@@ -1,614 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me - Ambrish Tiwari</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(0,255,200,0.08), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(120,100,255,0.12), transparent 30%),
-        linear-gradient(135deg, #06101d, #0b1730, #10214a);
-      color: #fff;
-      padding: 20px;
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: 920px;
-      margin: auto;
-      animation: fadeIn 1s ease;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(91,124,255,0.22), rgba(0,230,118,0.12));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
-      padding: 30px 22px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-      backdrop-filter: blur(10px);
-      margin-bottom: 22px;
-      animation: heroFloat 5s ease-in-out infinite;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(12px);
-      opacity: 0.35;
-      z-index: 0;
-    }
-
-    .hero::before {
-      width: 180px;
-      height: 180px;
-      background: #00e6b8;
-      top: -60px;
-      left: -50px;
-      animation: blob1 8s linear infinite alternate;
-    }
-
-    .hero::after {
-      width: 200px;
-      height: 200px;
-      background: #7a5cff;
-      bottom: -80px;
-      right: -70px;
-      animation: blob2 9s linear infinite alternate;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .profile-ring {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 16px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, #00e6b8, #5c7cff, #d85bff);
-      box-shadow: 0 0 30px rgba(92,124,255,0.25);
-      animation: ringPulse 2.8s ease-in-out infinite;
-    }
-
-    .profile {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: #0b1834;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 44px;
-      font-weight: bold;
-      color: #fff;
-      border: 3px solid rgba(255,255,255,0.04);
-    }
-
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #d8e0ff;
-      font-size: 16px;
-      line-height: 1.8;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .tag {
-      display: inline-block;
-      margin-top: 16px;
-      background: linear-gradient(135deg, #19c37d, #00e676);
-      color: #08131f;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: bold;
-      box-shadow: 0 10px 22px rgba(25,195,125,0.28);
-      animation: tagPulse 2s ease-in-out infinite;
-    }
-
-    .music-wrap,
-    .rating-wrap {
-      margin: 22px 0;
-      padding: 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
-    }
-
-    .music-wrap h2,
-    .rating-wrap h2 {
-      margin-bottom: 12px;
-      font-size: 22px;
-    }
-
-    .music-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .contact-btn,
-    .music-btn,
-    .submit-btn {
-      display: inline-block;
-      margin-top: 14px;
-      text-decoration: none;
-      background: linear-gradient(135deg, #22c55e, #00e676);
-      color: #07111f;
-      padding: 12px 22px;
-      border: none;
-      border-radius: 14px;
-      font-weight: bold;
-      font-size: 15px;
-      box-shadow: 0 10px 24px rgba(34,197,94,0.25);
-      transition: transform .3s ease, box-shadow .3s ease;
-      cursor: pointer;
-    }
-
-    .music-btn.secondary {
-      background: linear-gradient(135deg, #5c7cff, #7a5cff);
-      color: #fff;
-    }
-
-    .contact-btn:hover,
-    .music-btn:hover,
-    .submit-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 22px rgba(0,255,204,0.45);
-    }
-
-    .music-status {
-      margin-top: 12px;
-      color: #b9c8ff;
-      font-size: 14px;
-      line-height: 1.6;
-      white-space: pre-line;
-    }
-
-    audio {
-      width: 100%;
-      max-width: 420px;
-      margin-top: 14px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 24px;
-      padding: 22px 18px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
-      backdrop-filter: blur(10px);
-      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 22px 40px rgba(0,0,0,0.35);
-      border-color: rgba(0,255,200,0.22);
-    }
-
-    .card h2 {
-      font-size: 20px;
-      margin-bottom: 14px;
-      color: #fff;
-    }
-
-    .card p,
-    .card li {
-      color: #d7def7;
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .card ul {
-      padding-left: 20px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    .info-line {
-      margin-bottom: 9px;
-    }
-
-    .label {
-      color: #8fb3ff;
-      font-weight: bold;
-    }
-
-    .rating-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .avg-box {
-      color: #d7def7;
-      font-size: 16px;
-    }
-
-    .rating-note {
-      color: #b9c8ff;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .stars {
-      display: flex;
-      gap: 8px;
-      margin: 12px 0;
-      flex-wrap: wrap;
-    }
-
-    .star {
-      font-size: 34px;
-      cursor: pointer;
-      color: #667;
-      transition: transform .2s ease, color .2s ease;
-      user-select: none;
-    }
-
-    .star:hover {
-      transform: scale(1.15);
-    }
-
-    .star.active {
-      color: #ffd54a;
-      text-shadow: 0 0 14px rgba(255,213,74,0.35);
-    }
-
-    .review-input {
-      width: 100%;
-      min-height: 110px;
-      border: none;
-      outline: none;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 15px;
-      background: #0c1830;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.08);
-      resize: vertical;
-    }
-
-    .review-list {
-      margin-top: 18px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .review-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .review-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 6px;
-    }
-
-    .review-stars {
-      color: #ffd54a;
-      font-size: 18px;
-    }
-
-    .review-text {
-      color: #d7def7;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .empty-review {
-      color: #9fb2dc;
-      font-size: 14px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #aab7db;
-      margin-top: 22px;
-      font-size: 14px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes heroFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    @keyframes tagPulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
-    @keyframes ringPulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
-    @keyframes blob1 {
-      0% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(20px,10px) scale(1.08); }
-      100% { transform: translate(-10px,20px) scale(.96); }
-    }
-
-    @keyframes blob2 {
-      0% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(-20px,-8px) scale(1.06); }
-      100% { transform: translate(10px,-18px) scale(.95); }
-    }
-
-    @media (max-width:600px) {
-      body { padding: 16px; }
-      .hero { padding: 26px 16px; }
-      .hero h1 { font-size: 30px; }
-      .hero p { font-size: 15px; }
-      .profile-ring { width: 115px; height: 115px; }
-      .profile { font-size: 38px; }
-      .card { padding: 18px 15px; }
-      .star { font-size: 30px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambrish Tiwari | Official</title>
+    <meta name="description" content="Digital Content Creator, Gamer, and Memer based in Varanasi.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: #0f172a; color: white; font-family: 'Inter', sans-serif; min-height: 100vh; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-gradient { background: linear-gradient(45deg, #38bdf8, #818cf8); transition: 0.3s; }
+        .btn-gradient:hover { opacity: 0.9; transform: translateY(-2px); }
+    </style>
 </head>
-<body>
-  <div class="container">
+<body class="flex flex-col items-center py-10 px-4">
 
-    <div class="hero">
-      <div class="hero-content">
-        <div class="profile-ring">
-          <div class="profile">AT</div>
+    <div class="max-w-md w-full glass rounded-[2.5rem] p-8 text-center shadow-2xl">
+        <div class="relative w-32 h-32 mx-auto mb-6">
+            <img src="myphoto.jpg" alt="Ambrish Tiwari" class="w-full h-full rounded-full border-4 border-sky-500 object-cover shadow-lg">
+            <div class="absolute bottom-1 right-1 bg-green-500 w-6 h-6 rounded-full border-4 border-[#0f172a]"></div>
         </div>
-        <h1>Ambrish Tiwari</h1>
-        <p>
-          I want to build my career in a growing field where I can improve my skills
-          and earn good income.
-        </p>
-        <div class="tag">Fresher | Social Media Enthusiast</div>
-      </div>
-    </div>
-
-    <div class="music-wrap">
-      <h2>Background Music</h2>
-      <div class="music-buttons">
-        <button class="music-btn" id="playBtn">▶ Play Music</button>
-        <button class="music-btn secondary" id="pauseBtn">⏸ Pause Music</button>
-      </div>
-      <div class="music-status" id="musicStatus">Ready to play</div>
-
-      <audio id="bgMusic" loop controls preload="auto">
-        <source src="song.mp3" type="audio/mpeg">
-        Your browser does not support audio.
-      </audio>
-    </div>
-
-    <div class="rating-wrap">
-      <div class="rating-header">
-        <h2>Website Rating</h2>
-        <div class="avg-box">Average Rating: <span id="avgRating">0.0</span> / 5</div>
-      </div>
-
-      <div class="rating-note">Tap stars and write your review.</div>
-
-      <div class="stars" id="stars">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
-      </div>
-
-      <textarea id="reviewText" class="review-input" placeholder="Write your review here..."></textarea>
-      <button class="submit-btn" id="submitReview">Submit Rating</button>
-
-      <div class="review-list" id="reviewList">
-        <div class="empty-review">No reviews yet.</div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <h2>Personal Details</h2>
-        <p class="info-line"><span class="label">Name:</span> Ambrish Tiwari</p>
-        <p class="info-line"><span class="label">Date of Birth:</span> 18 June 2002</p>
-        <p class="info-line"><span class="label">Location:</span> Lucknow, Uttar Pradesh</p>
-        <p class="info-line">
-          <span class="label">Instagram ID:</span>
-          <a href="https://instagram.com/iamambrishh" target="_blank" style="color:#00ffcc;text-decoration:none;">
-            @iamambrishh
-          </a>
-        </p>
-      </div>
-
-      <div class="card">
-        <h2>Objective</h2>
-        <p>
-          I want to build my career in a growing field where I can improve my skills
-          and earn good income.
-        </p>
-      </div>
-
-      <div class="card">
-        <h2>Skills</h2>
-        <ul>
-          <li>Basic Mobile &amp; Internet Knowledge</li>
-          <li>Social Media Handling</li>
-          <li>Video Editing (Basic)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>Experience</h2>
-        <p>Fresher</p>
-      </div>
-
-      <div class="card">
-        <h2>Hobbies</h2>
-        <ul>
-          <li>Making Reels</li>
-          <li>Listening Music</li>
-          <li>Exploring Apps</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>Instagram</h2>
-        <p>Follow my profile to connect with me and check my updates.</p>
-        <a class="contact-btn" href="https://www.instagram.com/iamambrishh" target="_blank">Open Instagram</a>
-      </div>
-
-      <div class="card full">
-        <h2>Declaration</h2>
-        <p>
-          I hereby declare that all the above information is true to the best of my knowledge.
-        </p>
-      </div>
-    </div>
-
-    <div class="footer">
-      © 2026 Ambrish Tiwari | About Me Website
-    </div>
-
-  </div>
-
-  <script>
-    const music = document.getElementById("bgMusic");
-    const playBtn = document.getElementById("playBtn");
-    const pauseBtn = document.getElementById("pauseBtn");
-    const statusText = document.getElementById("musicStatus");
-
-    playBtn.addEventListener("click", async () => {
-      try {
-        statusText.textContent = "Trying to play music...";
-        music.volume = 0.2;
-        await music.play();
-        statusText.textContent = "Music is playing.";
-      } catch (error) {
-        statusText.textContent = "Music play failed. Check if song.mp3 is uploaded in the same folder.";
-      }
-    });
-
-    pauseBtn.addEventListener("click", () => {
-      music.pause();
-      statusText.textContent = "Music paused.";
-    });
-
-    music.addEventListener("error", () => {
-      statusText.textContent = "Audio file not found or not supported. Check file name: song.mp3";
-    });
-
-    const stars = document.querySelectorAll(".star");
-    const avgRatingEl = document.getElementById("avgRating");
-    const reviewTextEl = document.getElementById("reviewText");
-    const submitReviewBtn = document.getElementById("submitReview");
-    const reviewListEl = document.getElementById("reviewList");
-
-    let selectedRating = 0;
-    let reviews = JSON.parse(localStorage.getItem("ambrish_reviews") || "[]");
-
-    function paintStars(rating) {
-      stars.forEach(star => {
-        const value = Number(star.dataset.value);
-        if (value <= rating) {
-          star.classList.add("active");
-        } else {
-          star.classList.remove("active");
-        }
-      });
-    }
-
-    stars.forEach(star => {
-      star.addEventListener("click", () => {
-        selectedRating = Number(star.dataset.value);
-        paintStars(selectedRating);
-      });
-    });
-
-    function renderReviews() {
-      if (reviews.length === 0) {
-        reviewListEl.innerHTML = '<div class="empty-review">No reviews yet.</div>';
-        avgRatingEl.textContent = "0.0";
-        return;
-      }
-
-      const avg = reviews.reduce((sum, item) => sum + item.rating, 0) / reviews.length;
-      avgRatingEl.textContent = avg.toFixed(1);
-
-      reviewListEl.innerHTML = reviews.slice().reverse().map(item => `
-        <div class="review-card">
-          <div class="review-top">
-            <strong>User Review</strong>
-            <div class="review-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</div>
-          </div>
-          <div class="review-text">${item.text ? item.text : "No comment"}</div>
+        
+        <h1 class="text-3xl font-extrabold mb-1 tracking-tight">Ambrish Tiwari</h1>
+        <p class="text-sky-400 font-semibold mb-4 text-lg">@iamambrishh</p>
+        
+        <div class="flex justify-center gap-2 mb-6">
+            <span class="bg-sky-500/10 text-sky-400 text-[10px] uppercase font-bold px-3 py-1 rounded-lg border border-sky-500/20">Gamer</span>
+            <span class="bg-indigo-500/10 text-indigo-400 text-[10px] uppercase font-bold px-3 py-1 rounded-lg border border-indigo-500/20">Memer</span>
+            <span class="bg-purple-500/10 text-purple-400 text-[10px] uppercase font-bold px-3 py-1 rounded-lg border border-purple-500/20">Varanasi</span>
         </div>
-      `).join("");
-    }
 
-    submitReviewBtn.addEventListener("click", () => {
-      const text = reviewTextEl.value.trim();
+        <p class="text-gray-400 text-sm leading-relaxed mb-8 px-2">
+            Digital Content Creator & Gaming Professional based in Varanasi. Specializing in viral meme marketing and trending entertainment.
+        </p>
 
-      if (selectedRating === 0) {
-        alert("Please select a star rating first.");
-        return;
-      }
+        <div class="glass rounded-2xl p-4 mb-8">
+            <p class="text-[10px] uppercase text-gray-500 font-bold mb-3 tracking-widest">Now Playing</p>
+            <audio id="bgMusic" src="music.mp3"></audio>
+            <div class="flex items-center justify-center gap-4">
+                <button onclick="document.getElementById('bgMusic').play()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20">
+                    <i class="fas fa-play text-sky-400"></i>
+                </button>
+                <button onclick="document.getElementById('bgMusic').pause()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20">
+                    <i class="fas fa-pause text-red-400"></i>
+                </button>
+            </div>
+        </div>
 
-      reviews.push({
-        rating: selectedRating,
-        text: text
-      });
+        <div class="space-y-3">
+            <a href="https://instagram.com/iamambrishh" target="_blank" class="flex items-center justify-between w-full p-4 glass rounded-2xl hover:bg-white/5 transition-all group">
+                <span class="flex items-center gap-3 font-medium"><i class="fab fa-instagram text-pink-500 text-xl"></i> Instagram</span>
+                <i class="fas fa-external-link-alt text-gray-600 text-xs group-hover:text-white"></i>
+            </a>
+            <a href="https://facebook.com/virux" target="_blank" class="flex items-center justify-between w-full p-4 glass rounded-2xl hover:bg-white/5 transition-all group">
+                <span class="flex items-center gap-3 font-medium"><i class="fab fa-facebook text-blue-500 text-xl"></i> Facebook</span>
+                <i class="fas fa-external-link-alt text-gray-600 text-xs group-hover:text-white"></i>
+            </a>
+        </div>
+    </div>
 
-      localStorage.setItem("ambrish_reviews", JSON.stringify(reviews));
-      reviewTextEl.value = "";
-      selectedRating = 0;
-      paintStars(0);
-      renderReviews();
-      alert("Thanks for your rating!");
-    });
+    <footer class="mt-12 text-gray-600 text-[10px] font-medium tracking-widest uppercase">
+        &copy; 2026 Ambrish Tiwari | Official Portfolio
+    </footer>
 
-    renderReviews();
-  </script>
 </body>
-          </html>
+</html>
